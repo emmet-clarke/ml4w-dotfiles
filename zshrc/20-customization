@@ -1,0 +1,31 @@
+# -----------------------------------------------------
+# CUSTOMIZATION
+# -----------------------------------------------------
+
+plugins=(
+    git
+    sudo
+    web-search
+    archlinux
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    fast-syntax-highlighting
+    copyfile
+    copybuffer
+    dirhistory
+)
+
+# Source oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+# Set up FZF
+source <(fzf --zsh)
+
+# History settings
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+#posh theme
+eval "$(oh-my-posh init zsh --config ~/.poshthemes/pure.omp.json)"

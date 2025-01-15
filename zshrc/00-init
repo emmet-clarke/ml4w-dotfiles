@@ -1,0 +1,19 @@
+# -----------------------------------------------------
+# INIT
+# -----------------------------------------------------
+
+# -----------------------------------------------------
+# Exports
+# -----------------------------------------------------
+export PATH="$PATH:/home/emmet/.local/bin"
+export EDITOR=nvim
+export PATH="/usr/lib/ccache/bin/:$PATH"
+export ZSH="$HOME/.oh-my-zsh"
+
+# -----------------------------------------------------
+# Custom 
+# -----------------------------------------------------
+export CLOUDSDK_ROOT_DIR=/opt/google-cloud-cli
+export PATH=$PATH:$CLOUDSDK_ROOT_DIR/bin
+
+

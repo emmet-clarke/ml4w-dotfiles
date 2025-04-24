@@ -28,6 +28,7 @@ return {
         "neovim/nvim-lspconfig",
         config = function()
             local lspconfig = require("lspconfig")
+            local util = require("lspconfig.util")
             lspconfig.lua_ls.setup({
                 settings = {
                     Lua = {
@@ -36,25 +37,25 @@ return {
                         }
                     }
                 }
-                                
+
             })
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
             vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, {})
 
-            -- Simple ruff setup
             lspconfig.ruff.setup({
-                on_attach = function(_, bufnr)
-                    vim.keymap.set('n', '<leader>f', function()
-                        vim.lsp.buf.format()
-                        vim.lsp.buf.code_action({
-                            filter = function(action)
-                                return action.title == "Ruff: Organize Imports"
-                            end,
-                            apply = true
-                        })
-                    end, { buffer = bufnr })
-                end
+                 root_dir = util.root_pattern("pyproject.toml", ".git"),
+              on_attach = function(_, bufnr)
+                vim.keymap.set('n', '<leader>r', function()
+                  vim.lsp.buf.code_action({
+                    filter = function(a) return a.kind == "source.fixAll.ruff" end,
+                    apply = true,
+                  })
+                end, { buffer = bufnr, desc = "Ruff: Fix all" })
+                vim.keymap.set('n', '<leader>F', function()
+                    vim.lsp.buf.format({ name = "ruff", async = false })
+                end, { buffer = bufnr, desc = "Ruff: Format file" })
+              end,
             })
 
             lspconfig.terraformls.setup{

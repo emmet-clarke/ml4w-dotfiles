@@ -81,4 +81,7 @@ end
 vim.keymap.set('i', 'jk', '<ESC>', { noremap = true })
 vim.opt.timeoutlen = 200
 
+vim.keymap.set('n', '<leader>c', 'ggVG"+y', { desc = 'Copy buffer to system clipboard' })
+vim.keymap.set('n', '<leader>q', ':q!<CR>', { silent = true })
+
 require("lazy").setup("plugins")
